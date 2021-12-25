@@ -1,0 +1,7 @@
+*.pdf
+*.zip
+
+# tex compilation outputs
+*.aux
+*.log
+*.synctex.gz

@@ -1,0 +1,168 @@
+\documentclass[UTF8]{ctexart}
+\author{张三 19521025}
+\date{}
+\title{算法设计与分析 作业格式模板}
+\pagestyle{plain}
+\usepackage{ctex}
+\usepackage{fancyhdr}
+\usepackage[a4paper]{geometry}
+\usepackage{multicol}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{float}
+\usepackage{lipsum}
+
+\lstset{
+    basicstyle          =   \ttfamily,          % 基本代码风格
+    keywordstyle        =   \ttfamily,          % 关键字风格
+    commentstyle        =   \ttfamily\itshape,  % 注释的风格，斜体
+    stringstyle         =   \ttfamily,  % 字符串风格
+    flexiblecolumns,                % 别问为什么，加上这个
+    numbers             =   left,   % 行号的位置在左边
+    showspaces          =   false,  % 是否显示空格，显示了有点乱，所以不现实了
+    numberstyle         =   \ttfamily,    % 行号的样式，小五号，tt等宽字体
+    showstringspaces    =   false,
+    captionpos          =   t,      % 这段代码的名字所呈现的位置，t指的是top上面
+    frame               =   lrtb,   % 显示边框
+}
+
+\makeatletter
+\renewcommand{\section} {\@startsection{section}{1}{0mm}{-\baselineskip}{0.5\baselineskip}{\bf\leftline}}
+\makeatother
+
+\renewcommand{\algorithmicrequire}
+{\textbf{Input:}}
+\renewcommand{\algorithmicensure}
+{\textbf{Output:}}
+
+\makeatletter
+\newenvironment{breakablealgorithm}
+{% \begin{breakablealgorithm}
+    \begin{center}
+        \refstepcounter{algorithm}% New algorithm
+        \hrule height.8pt depth0pt \kern2pt% \@fs@pre for \@fs@ruled
+        \renewcommand{\caption}[2][\relax]{% Make a new \caption
+            {\raggedright\textbf{\ALG@name~\thealgorithm} ##2\par}%
+            \ifx\relax##1\relax % #1 is \relax
+            \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##2}%
+            \else % #1 is not \relax
+            \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##1}%
+            \fi
+            \kern2pt\hrule\kern2pt
+        }
+    }{% \end{breakablealgorithm}
+        \kern2pt\hrule\relax% \@fs@post for \@fs@ruled
+    \end{center}
+}
+\makeatother
+
+\begin{document}
+    \maketitle
+    
+    \section{题目名称}
+
+    这是一份简单的算法作业 \LaTeX 格式模板（该模板仅作为排版参考，不代表规范的答题格式）
+
+    \subsection{解答}
+
+    笔者使用的测试环境: Linux 系统, TeXLive 环境, TeX Studio 编辑器。
+
+    编译命令: $\texttt{xelatex -synctex=1 -interaction=nonstopmode MyTemplate.tex}$。
+    
+    \quad \\
+    
+    \section{题目名称}
+
+    题目描述。普通文本示例。数学环境示例 $n$, $G=(V, E)$。
+
+    以下是一个有序列表。
+
+    \begin{enumerate} 
+        \item 有序列表条目（一）
+        \item 有序列表条目（二）
+        \item 有序列表条目（三）
+    \end{enumerate}
+
+    以下是一个无序列表。
+
+    \begin{itemize} 
+        \item 无序列表条目（一）
+        \item 无序列表条目（二）
+        \item 无序列表条目（三）
+    \end{itemize}
+
+    \subsection{算法设计}
+
+    简要描述解决问题的算法的设计思路。
+
+    \subsection{伪代码}
+
+    \begin{breakablealgorithm}
+        \renewcommand{\thealgorithm}{}
+        \caption{伪代码示例}
+        \begin{algorithmic}[1]
+            \Require {问题的输入, 数据个数 $n$}
+            \Ensure {问题的输出, 数组 $L$}
+            \Function {func}{$a, b$}    % 定义函数, 第一个 {} 内是函数名，第二个 {} 内是形参
+                \State \Return $a + b$  % 函数体
+            \EndFunction
+            % 这段伪代码没有什么实际的意义
+            \State $count \gets 0$ % \State 表示一条语句, 除了 While/For/If 以外每条语句都必须以 \State 开头。
+            \State $L$ $\gets$ $\text{Array}[1 \cdots n]$  % 伪代码中对数据结构没有严格的格式规定
+            \While {$count < n$}    % While 循环
+                \State $count \gets count + 1$ \Comment{这是注释}
+                \State $L[count] \gets$ \Call{func}{$count, 1$} % \Call 函数调用
+            \EndWhile
+            \For {$i \gets 1 \cdots n$} % For 循环
+                \If {$i \% 2 = 0$}  % 条件分支
+                    \State $L[i] \gets 1$
+                \ElsIf {$i \% 3 = 0$}   % Else If (可以没有)
+                    \State $L[i] \gets 0$
+                \Else                   % Else (可以没有)
+                    \State $L[i] \gets i$
+                \EndIf
+            \EndFor
+            \State \Return $L$ % 算法的输出
+        \end{algorithmic}
+    \end{breakablealgorithm}
+
+    \subsection{时间复杂度}
+    
+    例: 该算法的时间复杂度为 $O(n)$。
+
+    \quad \\    % 这里为了强行增加一行空行，防止上下内容连在一起。
+
+    \section{另一道题}
+
+    另一道题的题目描述。
+
+    \subsection{算法设计}
+
+    这道题的算法设计思路。
+
+    \subsection{伪代码}
+
+    \begin{breakablealgorithm}
+        \renewcommand{\thealgorithm}{}
+        \caption{伪代码另一个示例}
+        \begin{algorithmic}[1]
+            \Require {两个整数 $a, b$}
+            \Ensure {输入整数的和}
+            \State \Return $a+b$
+        \end{algorithmic}
+    \end{breakablealgorithm}
+
+    \subsection{时间复杂度}
+
+    该算法的时间复杂度为 $O(1)$。
+    
+    \quad \\
+    
+    
+\end{document}
